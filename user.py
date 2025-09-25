@@ -1,6 +1,9 @@
 from pathlib import Path
-from utils import checkIfHeaderExists
+from utils import Login, checkIfHeaderExists
 from utils import checkIfPhoneNumberExists
+# from utils import findLineNumberOfUser
+from USSDinterface import farmer_menu
+from utils import get_user_by_phone
 import csv
 
 
@@ -15,10 +18,7 @@ class User:
         self.phone_number = phone_number
         self.location = location
         self.pin = pin
-
-    def Login(phone, pin):
-        user_phone = input('Enter your phone Number: ')
-        user_pin = input('Enter your pin: ')
+        
 
 class Farmer(User):
     def __init__(self, name, phone_number, location, pin, farm_size, primary_crops):
@@ -48,6 +48,9 @@ class Farmer(User):
                 writer.writerow(header)
             writer.writerow(data)
         print("Registered Successfully ✅✅")
+
+    def login():
+        Login(farmer_filepath)
 
 class Customer(User):
     def __init__(self, name, phone_number, location, pin):
