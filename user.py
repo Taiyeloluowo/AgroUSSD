@@ -1,5 +1,5 @@
 from pathlib import Path
-from utils import checkIfHeaderExists
+from utils import checkIfHeaderExists, getUserInfo
 from utils import checkIfPhoneNumberExists
 import csv
 
@@ -15,10 +15,6 @@ class User:
         self.phone_number = phone_number
         self.location = location
         self.pin = pin
-
-    def Login(phone, pin):
-        user_phone = input('Enter your phone Number: ')
-        user_pin = input('Enter your pin: ')
 
 class Farmer(User):
     def __init__(self, name, phone_number, location, pin, farm_size, primary_crops):
@@ -48,6 +44,21 @@ class Farmer(User):
                 writer.writerow(header)
             writer.writerow(data)
         print("Registered Successfully ✅✅")
+        
+    def Login():
+        phoneNumber = input("Enter your phone Number: ")
+        password = input("Enter your password: ")
+        currentUser = getUserInfo(farmer_filepath, phoneNumber, password, 'farmer')
+        print(f"Welcome Back, {currentUser["name"]}")
+        while True and currentUser["name"]:
+            print("Select an option to continue: ")
+            print("1. Add harvest information: ")
+            print("2. Update profile")
+            print("3. Logout")
+            user_input = input("Enter an option: ")
+
+            if user_input == '3':
+                break
 
 class Customer(User):
     def __init__(self, name, phone_number, location, pin):
@@ -74,3 +85,8 @@ class Customer(User):
                 writer.writerow(header)
             writer.writerow(data)
         print("Registered Successfully ✅✅")
+    def Login():
+        phoneNumber = input("Enter your phone Number: ")
+        password = input("Enter your password: ")
+        currentUser = getUserInfo(customer_filepath, phoneNumber, password, 'farmer')
+        print(currentUser)

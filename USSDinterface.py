@@ -8,14 +8,17 @@ def main_menu(ussd_code):
             print('Select an option to continue\n')
             print('1. Register as a farmer')
             print('2. Register as a customer')
-            print('3. Login')
-            print('4. Exit\n')
+            print('3. Login as a Farmer')
+            print('4. Login as a User')
+            print('5. Exit\n')
             user_option = input("Enter option: ")
             if user_option == '1':
                 Farmer.register()
             elif user_option == '2':
                 Customer.register()
-            elif user_option == '4':
+            elif user_option == '3':
+                Farmer.Login()
+            elif user_option == '5':
                 break
             else:
                 print('==============================')
