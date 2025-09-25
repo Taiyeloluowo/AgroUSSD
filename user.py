@@ -49,8 +49,9 @@ class Farmer(User):
         phoneNumber = input("Enter your phone Number: ")
         password = input("Enter your password: ")
         currentUser = getUserInfo(farmer_filepath, phoneNumber, password, 'farmer')
-        print(f"Welcome Back, {currentUser["name"]}")
-        while True and currentUser["name"]:
+        if isinstance(currentUser, dict):
+            print(f"Welcome Back, {currentUser["name"]}")
+        while True and  isinstance(currentUser, dict):
             print("Select an option to continue: ")
             print("1. Add harvest information: ")
             print("2. Update profile")
@@ -85,8 +86,19 @@ class Customer(User):
                 writer.writerow(header)
             writer.writerow(data)
         print("Registered Successfully ✅✅")
+        
     def Login():
         phoneNumber = input("Enter your phone Number: ")
         password = input("Enter your password: ")
-        currentUser = getUserInfo(customer_filepath, phoneNumber, password, 'farmer')
-        print(currentUser)
+        currentUser = getUserInfo(customer_filepath, phoneNumber, password, 'customer')
+        if isinstance(currentUser, dict):
+            print(f"Welcome Back, {currentUser["name"]}")
+        while True and isinstance(currentUser, dict):
+            print("Select an option to continue: ")
+            print("1. Check market information: ")
+            print("2. Update profile")
+            print("3. Logout")
+            user_input = input("Enter an option: ")
+
+            if user_input == '3':
+                break

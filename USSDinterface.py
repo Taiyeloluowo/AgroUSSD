@@ -18,6 +18,8 @@ def main_menu(ussd_code):
                 Customer.register()
             elif user_option == '3':
                 Farmer.Login()
+            elif user_option == '4':
+                Customer.Login()
             elif user_option == '5':
                 break
             else:

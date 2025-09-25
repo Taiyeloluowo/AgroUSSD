@@ -48,7 +48,8 @@ def getUserInfo(file, phoneNumber, password, userType):
                 currentUser["phone"] = userInfo[1]
                 currentUser["location"] = userInfo[2]
                 currentUser["pin"] = userInfo[3]
-            if password == currentUser["pin"]:
+                
+            if password == currentUser["pin"].splitlines()[0]:
                 return currentUser
             else:
                 return "Invalid Password or Phone Number"
