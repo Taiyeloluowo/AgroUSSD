@@ -1,5 +1,5 @@
 from pathlib import Path
-from utils import Login, checkIfHeaderExists
+from utils import checkIfHeaderExists, getUserInfo
 from utils import checkIfPhoneNumberExists
 # from utils import findLineNumberOfUser
 from USSDinterface import farmer_menu
@@ -18,7 +18,6 @@ class User:
         self.phone_number = phone_number
         self.location = location
         self.pin = pin
-        
 
 class Farmer(User):
     def __init__(self, name, phone_number, location, pin, farm_size, primary_crops):
@@ -48,9 +47,22 @@ class Farmer(User):
                 writer.writerow(header)
             writer.writerow(data)
         print("Registered Successfully ✅✅")
+        
+    def Login():
+        phoneNumber = input("Enter your phone Number: ")
+        password = input("Enter your password: ")
+        currentUser = getUserInfo(farmer_filepath, phoneNumber, password, 'farmer')
+        if isinstance(currentUser, dict):
+            print(f"Welcome Back, {currentUser["name"]}")
+        while True and  isinstance(currentUser, dict):
+            print("Select an option to continue: ")
+            print("1. Add harvest information: ")
+            print("2. Update profile")
+            print("3. Logout")
+            user_input = input("Enter an option: ")
 
-    def login():
-        Login(farmer_filepath)
+            if user_input == '3':
+                break
 
 class Customer(User):
     def __init__(self, name, phone_number, location, pin):
@@ -77,3 +89,19 @@ class Customer(User):
                 writer.writerow(header)
             writer.writerow(data)
         print("Registered Successfully ✅✅")
+        
+    def Login():
+        phoneNumber = input("Enter your phone Number: ")
+        password = input("Enter your password: ")
+        currentUser = getUserInfo(customer_filepath, phoneNumber, password, 'customer')
+        if isinstance(currentUser, dict):
+            print(f"Welcome Back, {currentUser["name"]}")
+        while True and isinstance(currentUser, dict):
+            print("Select an option to continue: ")
+            print("1. Check market information: ")
+            print("2. Update profile")
+            print("3. Logout")
+            user_input = input("Enter an option: ")
+
+            if user_input == '3':
+                break
